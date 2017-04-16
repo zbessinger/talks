@@ -93,7 +93,6 @@ def decoder(x):
                                    biases['decoder_b2']))
     return layer_2
 
-
 mnist = input_data.read_data_sets("MNIST_data", one_hot=True)
 n_batches = int(mnist.train.num_examples / batch_size)
 
@@ -107,7 +106,6 @@ optimizer = tf.train.RMSPropOptimizer(learning_rate).minimize(cost)
 
 # Initializing the variables
 init = tf.global_variables_initializer()
-i_step = 0
 
 # Launch the graph
 with tf.Session() as sess:
@@ -119,6 +117,7 @@ with tf.Session() as sess:
             X_batch, y_batch = mnist.train.next_batch(batch_size)
             # Run optimization op (backprop) and cost op (to get loss value)
             _, c = sess.run([optimizer, cost], feed_dict={X: X_batch})
+
         # Display logs per epoch step
         if epoch % display_step == 0:
             print("Epoch:", '%04d' % (epoch + 1),
